@@ -1,9 +1,0 @@
-<launch>
-
-  <include file="$(find gp25_moveit_config)/launch/demo.launch"/>
-
-  <node name="gp25_python_interface" pkg="gp25_moveit_config" type="gp25_python_interface.py" respawn="false" output="screen">
-  </node>
-
-</launch>
-
