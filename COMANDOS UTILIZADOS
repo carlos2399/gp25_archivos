@@ -19,7 +19,7 @@
 
 -----CATKIN 
 -git clone https://github.com/ros/catkin.git
--sudo apt-get install ros-noetic-catkin
+-sudo apt-get install ros-indigo-catkin
 
 -----WORKSPACE
 -mkdir -p ~/catkin_ws/src
@@ -39,7 +39,7 @@
 -sudo apt install ros-indigo-moveit
 -cd ~/catkin_ws/
 -source devel/setup.bash
--roslaunch moveit_setup_assistant setup_assistant.launchclear
+-roslaunch moveit_setup_assistant setup_assistant.launch
 
 -----CARGAR ROBOT EN RVIZ
 -cd ~/moveit_ws/
@@ -53,7 +53,9 @@
 ------PASAR ARCHIVO .XACRO A .URDF
 -rosrun xacro xacro gp25_macro.xacro --inorder > gp25.urdf
 
-
+------MOTOMAN
+-git clone https://github.com/ros-industrial/motoman.git
+-sudo apt-get install ros-indigo-motoman
 
 
 
