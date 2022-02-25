@@ -58,22 +58,7 @@
 -sudo apt-get install ros-indigo-motoman
 
 ------CMAKE
-sudo apt-get install build-essential
-wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz
-tar xf cmake-3.2.2.tar.gz
-cd cmake-3.2.2
-./configure
-make
-
-Ahora puede tener que elegir un tipo de instalación para decidir, recomiendo instalar con checkinstall ya que esto crea un paquete DEB.
-
-    Con checkinstall
-
-    sudo apt-get install checkinstall
-    sudo checkinstall
-
-Fuente: https://www.enmimaquinafunciona.com/pregunta/29573/como-instalar-cmake-32-en-ubuntu
-
+sudo apt-get install cmake3
 
 
 
