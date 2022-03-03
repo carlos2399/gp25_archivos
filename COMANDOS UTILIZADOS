@@ -60,8 +60,14 @@
 ------CMAKE
 sudo apt-get install cmake3
 
-
-
+------TOPICS
+rostopic list Muestra la lista de topics activos
+rostopic echo [nombre del topic] 	Muestra los mensajes publicados en el topic
+rostopic find [tipo de mensaje] 	Busca topics por tipo de mensaje
+rostopic type [nombre del topic] 	Muestra el tipo de mensaje de un topic
+rostopic info [nombre del topic] 	Muestra información de los topics activos
+rostopic pub [nombre del topic] [tipo de mensaje] [datos] 	Publica datos en el topic
+rosmsg show sensor_msgs/JointState
 
 
 
