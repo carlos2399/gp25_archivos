@@ -77,6 +77,8 @@ rosmsg show sensor_msgs/JointState
 -sudo apt-get install ros-indigo-gazebo7-ros-pkgs
 -catkin_create_pkg my_robot_urdf rospy
 -roslaunch gazebo_ros empty_world.launch
+-rosservice call /gazebo/get_world_properties
+-roslaunch motoman_gp25_support spawn_urdf.launch 
 
 
 
