@@ -73,4 +73,12 @@ rosmsg show sensor_msgs/JointState
 -sudo su
 -sync && echo 3 > /proc/sys/vm/drop_caches
 
+------GAZEBO
+-sudo apt-get install ros-indigo-gazebo7-ros-pkgs
+-catkin_create_pkg my_robot_urdf rospy
+-roslaunch gazebo_ros empty_world.launch
+
+
+
+
 
