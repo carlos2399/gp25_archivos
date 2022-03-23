@@ -42,9 +42,13 @@
 -roslaunch moveit_setup_assistant setup_assistant.launch
 
 -----CARGAR ROBOT EN RVIZ
--cd ~/moveit_ws/
+-cd ~/catkin_ws/
 -source devel/setup.bash
--roslaunch "NOMBRE ROBOT" demo.launch 
+-roslaunch motoman_gp25_config demo.launch 
+-rosrun motoman_gp25_config gp25_prueba.py
+-rosrun motoman_gp25_config gp25_prueba_l.py
+-rostopic echo /joint_states 
+-rostopic info /joint_states 
 
 ------HACER ARCHIVO PYTHON EJECUTABLE
 -chmod +x scripts/"NOMBRE ARCHIVO".py
