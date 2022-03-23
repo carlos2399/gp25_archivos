@@ -82,7 +82,10 @@ rosmsg show sensor_msgs/JointState
 -rosservice call /gazebo/get_world_properties
 -roslaunch motoman_gp25_support spawn_urdf.launch 
 
-
+------CHROME
+-wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+-sudo apt-get update
+-sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 
 
