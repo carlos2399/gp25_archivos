@@ -72,6 +72,8 @@ rosmsg show sensor_msgs/JointState
 ------LIMPIAR CACHE
 -sudo su
 -sync && echo 3 > /proc/sys/vm/drop_caches
+-sudo apt-get clean
+-sudo apt-get autoremove
 
 ------GAZEBO
 -sudo apt-get install ros-indigo-gazebo7-ros-pkgs
