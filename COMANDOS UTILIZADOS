@@ -1,7 +1,3 @@
------CHROME
--sudo dpkg -i Descargas/google-chrome-stable_current_amd64.deb
--sudo apt install -f
-
 -----GIT
 -sudo apt-get install git
 
