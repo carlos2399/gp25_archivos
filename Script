@@ -1,0 +1,45 @@
+---ABRIR RVIZ---
+ - cd ~/catkin_ws  
+ - source devel/setup.bash  - 
+ - roslaunch motoman_gp25_config demo.launch
+
+---1---
+ - EN OTRA PESTAÑA
+ - modificar ip ordenador: 192.168.3.32 255.255.255.0 0.0.0.0
+ - para comprobar que se ha cambiado: ifconfig 
+
+---2---
+ - ping 192.168.3.33
+
+---3---
+ - cd ~/catkin_ws  
+ - source devel/setup.bash  
+ - catkin build
+
+---4---
+ - Diferente pestaña: roscore
+
+---5---
+ - VOLVEMOS A LA MISMA PESTAÑA
+ - rosparam load /home/ros/catkin_ws/src/motoman/motoman_gp25_support/urdf/gp25.urdf robot_description
+
+---6---
+ - rosparam set controller_joint_names "[joint_1_s, joint_2_l, joint_3_u, joint_4_r, joint_5_b, joint_6_t]"
+
+---7---
+ - roslaunch motoman_driver robot_interface_streaming_yrc1000.launch robot_ip:=192.168.3.33 &
+
+---8---
+ - rosservice call /robot_enable
+
+---9---
+ - rosrun motoman_driver move_to_joint.py "[1.851489543914795, 0.1814519315958023, -0.44645413756370544, -0.23572798073291779, 0.8488105535507202, 3.4821078777313232]"
+
+ - rosrun motoman_driver move_to_joint.py "[1.8940110206604004, -0.5322883129119873, -0.4464322328567505, -0.23572798073291779, 0.8488105535507202, 3.4821078777313232]"
+
+
+---OTROS COMANDOS UTILES---
+
+ - rostopic list
+ - rostopic echo /joint_states
+ - rostopic info /joint_states
