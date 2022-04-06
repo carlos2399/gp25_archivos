@@ -75,6 +75,10 @@ rosmsg show sensor_msgs/JointState
 -sudo apt-get clean
 -sudo apt-get autoremove
 
+- CTRL + H 
+- .cache
+-borrar
+
 ------GAZEBO
 -sudo apt-get install ros-indigo-gazebo7-ros-pkgs
 -catkin_create_pkg my_robot_urdf rospy
