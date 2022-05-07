@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<launch>
-	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find motoman_gp25_support)/urdf/gp25.xacro'" />
-
-	<node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" output="screen"
-	      args="-urdf -param robot_description -model gp25"/>
-
-</launch>
