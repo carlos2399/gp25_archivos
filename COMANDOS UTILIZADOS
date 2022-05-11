@@ -69,6 +69,11 @@ rostopic info [nombre del topic] 	Muestra información de los topics activos
 rostopic pub [nombre del topic] [tipo de mensaje] [datos] 	Publica datos en el topic
 rosmsg show sensor_msgs/JointState
 
+------NODES
+rosnode list
+rosnode info
+rosnode kill
+
 ------LIMPIAR CACHE
 -sudo su
 -sync && echo 3 > /proc/sys/vm/drop_caches
