@@ -1,0 +1,21 @@
+http://docs.ros.org/en/kinetic/api/visp_ros/html/tutorial-ros-grabber.html
+https://answers.ros.org/question/197651/how-to-install-a-driver-like-usb_cam/
+https://answers.ros.org/question/218573/running-2-different-cameras-using-usb_cam/
+https://answers.ros.org/question/131331/usb_cam-errorwebcam-expected-picture-but-didnt-get-it/
+
+
+
+1 - roscore
+2 - cd ~/catkin_ws/src/visp_ros/tutorial/grabber/visp
+3 - rosparam set usb_cam/pixel_format yuyv
+4 - rosrun usb_cam usb_cam_node
+5 - rosrun image_view image_view image:=/usb_cam/image_raw
+
+
+
+
+1 - cd ~/catkin_ws/src/visp_ros/tutorial/grabber/visp
+2 - cmake .
+3 - make
+4 - ./tutorial-visp-grabber-v4l2
+
