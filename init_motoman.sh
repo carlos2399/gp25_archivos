@@ -1,26 +1,14 @@
 #!/bin/bash
-# hola 
 
-# Pestaña 1:
-echo "-------------------- Init roscore --------------------"
-cd $HOME/catkin_ws && source $HOME/catkin_ws/devel/setup.bash && roscore
-sleep 2
+1 - cd $HOME/catkin_ws && source $HOME/catkin_ws/devel/setup.bash  
 
-# Pestaña 2:
-echo "-------------------- Load URDF --------------------"
-rosparam load /home/ros/URDF_github/yaskawa_gp25_support/urdf/model.urdf robot_description &
-sleep 2
-echo "Set controller"
-rosparam set controller_joint_names "[joint_1, joint_2, joint_3, joint_4, joint_5, joint_6]" &
-sleep 2
+2 - roscore (diferente pestaña)
 
-# Pestaña 1:
-echo "-------------------- terminar roscore --------------------"
-kill -INT 888 # Ctrl + c ( terminar proceso roscore ) 
-sleep 2
-echo "-------------------- iniciar motoman --------------------"
-roslaunch motoman_driver robot_interface_streaming_yrc1000.launch robot_ip:=192.168.3.33 &
-sleep 2
+3 - rosparam load /home/ros/catkin_ws/src/motoman/motoman_gp25_support/urdf/gp25.urdf robot_description
+
+4 - rosparam set controller_joint_names "[joint_1_s, joint_2_l, joint_3_u, joint_4_r, joint_5_b, joint_6_t]" &
+
+5 - roslaunch motoman_driver robot_interface_streaming_yrc1000.launch robot_ip:=192.168.3.33 &
 
 # Pestaña 2:
 echo "-------------------- robot_enable --------------------"

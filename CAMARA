@@ -3,6 +3,9 @@ https://answers.ros.org/question/197651/how-to-install-a-driver-like-usb_cam/
 https://answers.ros.org/question/218573/running-2-different-cameras-using-usb_cam/
 https://answers.ros.org/question/131331/usb_cam-errorwebcam-expected-picture-but-didnt-get-it/
 
+MODELO INVERSO
+https://www.youtube.com/watch?v=aKsqIv3Ktmo
+
 
 
 1 - roscore
@@ -18,4 +21,14 @@ https://answers.ros.org/question/131331/usb_cam-errorwebcam-expected-picture-but
 2 - cmake .
 3 - make
 4 - ./tutorial-visp-grabber-v4l2
+
+
+
+
+1 - cd ~/catkin_ws/src/visp_ros/tutorial/grabber/ros
+2 - cmake .
+3 - make
+4 - cd ~/catkin_ws/src/visp_ros/tutorial/grabber/ros
+5 - roslaunch camera-usb.launch --use-camera-info
+6 - ./tutorial-ros-grabber
 

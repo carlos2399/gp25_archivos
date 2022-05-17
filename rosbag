@@ -1,0 +1,16 @@
+ - record: este comando permite guardar tópicos, los cuales se les pasan en orden. Se puede usar la opción -a para guardar todos 		   los tópicos.
+ - play: permite reproducir un rosbag previamente guardado con record. Cuando se reproduce el rosbag se puede pausar usando la 		 tecla espacio, luego se puede avanzar paso por paso con la tecla s
+ - compress: debido a la cantidad de información, este comando permite comprimir los archivos utilizados.
+ - decompress: descomprime los archivos comprimidos previamente con el comando compress.
+
+
+
+ Antes de abrir rviz:
+
+  rosparam set use_sim_time true
+
+Luego para reproducir el rosbag:
+
+  rosbag play my_rosbag_file.bag --clock
+  
+
