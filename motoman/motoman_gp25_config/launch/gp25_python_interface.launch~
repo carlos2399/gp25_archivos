@@ -1,9 +1,0 @@
-<launch>
-
-  <include file="$(find motoman_gp25_config)/launch/demo.launch"/>
-
-  <node name="gp25_python_interface" pkg="motoman_gp25_config" type="gp25_python_interface.py" respawn="false" output="screen">
-  </node>
-
-</launch>
-
