@@ -18,6 +18,7 @@
 -sudo apt-get install ros-indigo-catkin
 -sudo apt-get install ros-kinetic-catkin python-catkin-tools 
 -https://stackoverflow.com/questions/41234957/catkin-command-not-found
+-sudo apt-get install cmake-curses-gui
 
 -----WORKSPACE
 -mkdir -p ~/catkin_ws/src

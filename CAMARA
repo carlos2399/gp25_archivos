@@ -14,6 +14,14 @@ https://github.com/mapeditor/tiled/issues/1107
 
 
 
+-----INSTALAR
+https://visp-doc.inria.fr/doxygen/visp-daily/tutorial-install-ubuntu-package.html
+https://visp-doc.inria.fr/doxygen/visp-daily/tutorial-install-ros-package.html
+http://wiki.ros.org/vision_visp
+http://wiki.ros.org/visp_ros/Tutorials/Howto_install_visp_ros
+sudo apt-get install ros-indigo-usb-cam
+
+
 1 - roscore
 2 - cd ~/catkin_ws/src/visp_ros/tutorial/grabber/visp
 3 - rosparam set usb_cam/pixel_format yuyv
