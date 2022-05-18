@@ -16,6 +16,8 @@
 -----CATKIN 
 -git clone https://github.com/ros/catkin.git
 -sudo apt-get install ros-indigo-catkin
+-sudo apt-get install ros-kinetic-catkin python-catkin-tools 
+-https://stackoverflow.com/questions/41234957/catkin-command-not-found
 
 -----WORKSPACE
 -mkdir -p ~/catkin_ws/src
