@@ -3,6 +3,9 @@
 from __future__ import print_function
 from six.moves import input
 
+import rospy
+import numpy as np
+
 import sys
 import copy
 import rospy
@@ -15,8 +18,10 @@ try:
 except: 
     from math import pi, fabs, cos, sqrt
 
-from std_msgs.msg import String
+
+from std_msgs.msg import String,Float64MultiArray
 from moveit_commander.conversions import pose_to_list
+from geometry_msgs.msg import PoseStamped
 
 class MoveGroupPythonInterfaceTutorial(object):
     """MoveGroupPythonInterfaceTutorial"""
@@ -59,65 +64,52 @@ class MoveGroupPythonInterfaceTutorial(object):
         self.display_trajectory_publisher = display_trajectory_publisher
         self.planning_frame = planning_frame
         self.eef_link = eef_link
-        self.group_names = group_names
+        self.group_names = group_names 
 
-# Movimiento 1
-    def go_to_joint_state(self):
-        # Convertimos las variables en variables locales
-        move_group = self.move_group
+def callback(data):
+       	rospy.loginfo("POSITION: %s",data.pose.position)
+      	rospy.loginfo("ORIENTATION: %s",data.pose.orientation)
 
-        # Cogemos los valores de las articulaciones y establecemos los valores deseados
-        joint_goal = move_group.get_current_joint_values()
-        joint_goal[0] = pi / 2
-        joint_goal[1] = 0
-        joint_goal[2] = 0
-        joint_goal[3] = pi / 2
-        joint_goal[4] = -pi / 6
-        joint_goal[5] = pi / 3 
-	
-	print("La posicion objetivo es: ",joint_goal)
-	
-	# Con el siguiente comando mandamos al robot ir a la posicion indicada
-        move_group.go(joint_goal, wait=True)
+        x = 1
+        y = 0.5
+        z = 1
 
-        # Llamando a stop() nos aseguramos de que no queden movimientos residuales
-        move_group.stop()
+        A=np.array([[1,0,0,x],[0,1,0,y],[0,0,1,z],[0,0,0,1]]) 
+        B=np.array([[data.pose.position.x],[data.pose.position.y],[data.pose.position.z],[1]])
+        m_1 = np.dot(A,B)
+        print("Punto inicial del robot= ", m_1)
+  	if data.pose.position.y == 0:
 
-# Movimiento 2
-    def go_to_joint_state_2(self):
-        move_group = self.move_group
+		q_1 = pi/2
+	else:
 
-        joint_goal = move_group.get_current_joint_values()
-        joint_goal[0] = pi
-        joint_goal[1] = pi/3
-        joint_goal[2] = pi / 4
-        joint_goal[3] = -pi
-        joint_goal[4] = pi / 2
-        joint_goal[5] = -pi / 6
+        	q_1 = np.arctan(data.pose.position.x/data.pose.position.y)
+        	print(q_1)
 
-	print("La posicion objetivo es: ",joint_goal)
-
-        move_group.go(joint_goal, wait=True)
+        move_group = robot_state.move_group
        
-        move_group.stop()
-
-# Movimiento 3
-    def go_to_joint_state_3(self):
-        move_group = self.move_group
-
         joint_goal = move_group.get_current_joint_values()
-        joint_goal[0] = 0
-        joint_goal[1] = 0
-        joint_goal[2] = 0
-        joint_goal[3] = 0
-        joint_goal[4] = 0
-        joint_goal[5] = 0 
-
-	print("La posicion objetivo es: ",joint_goal)
-
+        joint_goal[0] = q_1
+      
+        print("La posicion objetivo es: ",joint_goal)
+	
         move_group.go(joint_goal, wait=True)
-       
+      
         move_group.stop()
+
+	q1_min = -1
+	q1_max = 1
+ 
+
+def listener():
+
+        #rospy.init_node('joint_states_listener')
+
+        control_subscriber=rospy.Subscriber('/visp_auto_tracker/object_position', PoseStamped, callback)
+
+        rospy.spin()
+
+robot_state = MoveGroupPythonInterfaceTutorial()
 
 def main():
 	print("")
@@ -126,27 +118,13 @@ def main():
 	print("----------------------------------------------------------")
 	print("")
 	input("============ Pulsa ENTER para establecer el estado del robot")
-	robot_state = MoveGroupPythonInterfaceTutorial()
+	#robot_state = MoveGroupPythonInterfaceTutorial()
 	print("============ Pulsa ENTER para realizar el movimiento")
 
 	while not rospy.is_shutdown():
 
 		input("")
-		robot_state.go_to_joint_state()
-		print("")
-
-		input("============  Movimiento completado, pulsa ENTER para el siguiente movimiento o CTRL+D para salir del programa")
-		print("")
-		robot_state.go_to_joint_state_2()
-
-		print("")
-		print("============ Movimiento completado, pulsa ENTER para el siguiente movimiento o CTRL+D para salir del programa")
-
-		input("")
-		robot_state.go_to_joint_state_3()
-
-		print("")
-		print("============ Movimiento completado, pulsa ENTER repetir los movimientos o CTRL+D para salir del programa")
+		listener()
 		print("")
 
 
