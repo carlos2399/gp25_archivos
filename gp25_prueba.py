@@ -28,7 +28,6 @@ def my_publisher():
 
 	rospy.loginfo("PUBLISIHNG DATA")
 
-
 if __name__ == '__main__':
     try:
         my_publisher()

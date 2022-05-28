@@ -22,13 +22,20 @@ def callback(data):
 
     A=np.array([[1,0,0,x],[0,1,0,y],[0,0,1,z],[0,0,0,1]]) 
     B=np.array([[data.pose.position.x],[data.pose.position.y],[data.pose.position.z],[1]])
-    np.dot(A,B)
-    print("Punto inicial del robot= ", np.dot(A,B))
+    m_1 = np.dot(A,B)
+    print("Punto inicial del robot= ", m_1)
+ 	
+    print("Posicion 1 del vector= ",m_1[0])
+    print("Posicion 2 del vector= ",m_1[1]) 
 
-    q_1 = np.arctan(data.pose.position.x/data.pose.position.y)
-    print(q_1)
+    if m_1[0] == 0:
 
-    
+	q_1 = pi/2
+    else:
+
+        q_1 = np.arctan(m_1[0]/m_1[1])
+        print("Punto q_1= ",q_1[0])
+
 
 def listener():
 

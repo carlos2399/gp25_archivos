@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-## To use the python interface to move_group, import the moveit_commander module.  We also import rospy and some messages that we will use.
 import sys
 import copy
 import rospy
@@ -11,44 +10,28 @@ import geometry_msgs.msg
 from std_msgs.msg import String
 
 def gp25_python_interface():
-  ## First initialize moveit_commander and rospy.
-  print "============ Starting tutorial setup"
-  moveit_commander.roscpp_initialize(sys.argv)
-  rospy.init_node('gp25_python_interface',
-                  anonymous=True)
 
-  ## Instantiate a RobotCommander object.  This object is an interface to the robot as a whole.
+  moveit_commander.roscpp_initialize(sys.argv)
+  rospy.init_node('gp25_python_interface', anonymous=True)
+
   robot = moveit_commander.RobotCommander()
 
-  ## Instantiate a PlanningSceneInterface object.  This object is an interface to the world surrounding the robot.
   scene = moveit_commander.PlanningSceneInterface()
 
-  ## Instantiate a MoveGroupCommander object.  This object is an interface to one group of joints. 
   brazo = moveit_commander.MoveGroupCommander("Motoman")
 
-  ## We create this DisplayTrajectory publisher which is used below to publish trajectories for RVIZ to visualize.
-  display_trajectory_publisher = rospy.Publisher(
-                                      '/move_group/display_planned_path',
-                                      moveit_msgs.msg.DisplayTrajectory,
-				      queue_size=20,
-				      )
+  display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path', moveit_msgs.msg.DisplayTrajectory, queue_size=20)
 
-  ## Wait for RVIZ to initialize. This sleep is ONLY to allow Rviz to come up.
-  print "============ Waiting for RVIZ..."
-  rospy.sleep(10)
-  print "============ Starting tutorial "
+  print "============ Esperando a que RVIZ se abra ..."
+  rospy.sleep(1)
 
-  ## We can get the name of the reference frame for this robot
   print "============ Reference frame: %s" % brazo.get_planning_frame()
 
-  ## We can also print the name of the end-effector link for this group
   print "============ Reference frame: %s" % brazo.get_end_effector_link()
   
-  ## We can get a list of all the groups in the robot
   print "============ Robot Groups:"
   print robot.get_group_names()
 
-  ## Sometimes for debugging it is useful to print the entire state of the robot.
   print "============ Printing robot state"
   print robot.get_current_state()
   print "============"
@@ -57,7 +40,7 @@ def gp25_python_interface():
   ## PLANNING TO A POSE GOAL
   ## ^^^^^^^^^^^^^^^^^^^^^^^
   ## We can plan a motion for this group to a desired pose for the end-effector
-  ## FOR LEFT ARM
+  
   print "============ Generating plan 1"
   pose_target = geometry_msgs.msg.Pose()
   pose_target.orientation.w = 1.0
@@ -70,7 +53,7 @@ def gp25_python_interface():
   plan1 = brazo.plan()
 
   print "============ Waiting while RVIZ displays plan1"
-  rospy.sleep(5)
+  rospy.sleep(2)
 
   print "============ Visualizing plan1"
   display_trajectory = moveit_msgs.msg.DisplayTrajectory()
@@ -80,7 +63,7 @@ def gp25_python_interface():
   display_trajectory_publisher.publish(display_trajectory);
 
   print "============ Waiting while plan1 for left arm is visualized again"
-  rospy.sleep(5)
+  rospy.sleep(2)
 
   ## PLANNING TO A JOINT-SPACE GOAL
   ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
