@@ -5,6 +5,7 @@ import rospy
 import time
 import commands
 import os
+import sys 
 
 try:
 	from math import pi, tau, dist, fabs, cos
@@ -22,20 +23,19 @@ def callback(data):
 		
 		print("+++++++ROBOT ESPERANDO LEER QR")
 		print(data.data)
-		time.sleep(5)
 	    	
 	elif data.data == 3:
 
 		print("+++++++POSICION LEIDA, ESPERANDO MOVIMIENTO")
 		print(data.data)
 		os.system ("/home/carlos/catkin_ws/src/motoman/motoman_gp25_config_2/scripts/gp25.py")
-		time.sleep(5)
+		#sys.exit("POSICION ALCANZADA") 
+		os._exit(os.EX_OK) 
 
 	elif data.data == 4:
 
 		print("+++++++LEYENDO POSICION")
 		print(data.data)
-		time.sleep(5)
 	
 def listener():
 
@@ -47,5 +47,7 @@ def listener():
 
 
 if __name__ == '__main__':
-	listener()    	
-	
+
+		listener()
+	#except rospy.ROSInterruptException:
+	#	pass

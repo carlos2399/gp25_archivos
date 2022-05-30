@@ -6,8 +6,6 @@ https://answers.ros.org/question/131331/usb_cam-errorwebcam-expected-picture-but
 MODELO INVERSO
 https://www.youtube.com/watch?v=aKsqIv3Ktmo
 
-INFO
-https://articulatedrobotics.xyz/ready-for-ros-6-tf/
 
 https://visp-doc.inria.fr/doxygen/visp-daily/
 https://visp-doc.inria.fr/doxygen/visp-daily/tutorial-install-ubuntu.html
@@ -47,4 +45,10 @@ sudo apt-get install ros-indigo-usb-cam
 4 - cd ~/catkin_ws/src/visp_ros/tutorial/grabber/ros
 5 - roslaunch camera-usb.launch --use-camera-info
 6 - ./tutorial-ros-grabber
+
+
+ roslaunch visp_auto_tracker tracklive_usb.launch
+
+
+https://github.com/bharathp666/opencv_qr
 

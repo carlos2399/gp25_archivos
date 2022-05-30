@@ -7,6 +7,7 @@ import rospy
 import numpy as np
 
 import sys
+import os
 import copy
 import rospy
 import time
@@ -67,51 +68,83 @@ def callback(data):
        	rospy.loginfo("POSITION: %s",data.pose.position)
       	rospy.loginfo("ORIENTATION: %s",data.pose.orientation)
 	
-        x = 1
-    	y = 0.5
-    	z = 1
+        x = 0
+    	y = 0
+    	z = 0
+
+	q_1_min = -pi
+	q_1_max = pi
 	
-	dato_1 = data.pose.position.x * 20
-	dato_2 = data.pose.position.y * 10
-	dato_3 = data.pose.position.z * 20
-
     	A=np.array([[1,0,0,x],[0,1,0,y],[0,0,1,z],[0,0,0,1]]) 
-    	B=np.array([[dato_1],[dato_2],[dato_3],[1]])
-    	m_1 = np.dot(A,B)
-    	print("Punto inicial del robot= ", m_1)
- 	
-    	print("Posicion 1 del vector= ",m_1[0])
-    	print("Posicion 2 del vector= ",m_1[1]) 
+    	B=np.array([[data.pose.position.x],[data.pose.position.y],[data.pose.position.z],[1]])
+    	m_1 = np.dot(A,B)  	
+	print("Punto inicial del robot imaginario= ", m_1)
+	
+	m_1[0] = 297.8461147631*m_1[0]+1.04685057
+	m_1[1] = 297.8461147631*m_1[1]+1.04685057
+	m_1[2] = 297.8461147631*m_1[2]+1.04685057
 
+	print("Punto inicial del robot real= ", m_1)
+	
+	#CALCULO Q1
     	if m_1[0] == 0:
 
 		q_1 = pi/2
     	else:
 
-        	q_1 = np.arctan(m_1[0]/m_1[1])
+        	q_1 = np.arctan(m_1[1]/m_1[0])
         	print("Punto q_1= ",q_1[0])
 
-        move_group = robot_state.move_group
-       
-        joint_goal = move_group.get_current_joint_values()
-        joint_goal[0] = q_1[0]
-        
-        print("La posicion objetivo es: ",joint_goal)
+	#CALCULO Q3
+	l_1 = 50.5
+	l_2 = 76
+	l_3 = 79.5
 	
-        move_group.go(joint_goal, wait=True)
-      
-        move_group.stop()
+	cos_q_3 = (pow(m_1[0],2)+pow(m_1[1],2)+pow(m_1[2],2)-pow(l_2,2)-pow(l_3,2))/(2*l_2*l_3)
 
+	sqrt_3 = np.sqrt(1-pow(cos_q_3,2))
+
+	q_3 = np.arctan(sqrt_3/cos_q_3)
+	print('Punto q_3= ',q_3[0])
+
+	#CALCULO Q2
+	sqrt_2 = np.sqrt(pow(m_1[0],2)+pow(m_1[1],2))
+
+	q_2 = np.arctan(m_1[2]/sqrt_2)-np.arctan((l_3*np.sin(q_3))/(l_2+l_3*np.cos(q_3)))
+	print('Punto q_2= ',q_2[0])	
 	
+	if q_1_min <= q_1 <= q_1_max:
+		
+		print("DENTRO DE LOS LIMITES")
+		move_group = robot_state.move_group
+	       
+		joint_goal = move_group.get_current_joint_values()
+		joint_goal[0] = q_1[0]
+		joint_goal[1] = q_2[0]
+	      	joint_goal[2] = q_3[0]
+
+		#print("La posicion objetivo es: ",joint_goal)
+	
+		move_group.go(joint_goal, wait=True)
+	      
+		move_group.stop()
+	
+		sys.exit("POSICION ALCANZADA") 	
+
+	else:
+		printprint("NO ESTA DENTRO DE LOS LIMITES - ERROR")
+		sys.exit("POSICION ALCANZADA") 
 
 def listener():
 
         #rospy.init_node('joint_states_listener')
+	print("PULSE ENTER PARA COGER INFORMACION")
+	input()
 
-        control_subscriber=rospy.Subscriber('/visp_auto_tracker/object_position', PoseStamped, callback)
+	control_subscriber=rospy.Subscriber('/visp_auto_tracker/object_position', PoseStamped, callback)
+
+	rospy.spin()
 	
-        rospy.spin()
-
 robot_state = MoveGroupPythonInterfaceTutorial()
 
 def main():

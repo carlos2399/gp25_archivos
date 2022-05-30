@@ -39,6 +39,9 @@
 -cd ~/catkin_ws/
 -source devel/setup.bash
 -roslaunch moveit_setup_assistant setup_assistant.launch
+-sudo apt-get install ros-indigo-moveit-kinematics
+
+
 
 -----CARGAR ROBOT EN RVIZ
 -cd ~/catkin_ws/
@@ -50,6 +53,7 @@
 -rostopic info /joint_states 
 
 ------HACER ARCHIVO PYTHON EJECUTABLE
+-cd ~/catkin_ws/src/motoman/motoman_gp25_config_2/
 -chmod +x scripts/"NOMBRE ARCHIVO".py
 -rosrun "NOMBRE ROBOT"  "NOMBRE ARCHIVO".py
 
