@@ -120,8 +120,8 @@ def callback(data):
 	       
 		joint_goal = move_group.get_current_joint_values()
 		joint_goal[0] = q_1[0]
-		joint_goal[1] = q_2[0]
-	      	joint_goal[2] = q_3[0]
+		#joint_goal[1] = q_2[0]
+	      	#joint_goal[2] = q_3[0]
 
 		#print("La posicion objetivo es: ",joint_goal)
 	
@@ -133,7 +133,7 @@ def callback(data):
 
 	else:
 		printprint("NO ESTA DENTRO DE LOS LIMITES - ERROR")
-		sys.exit("POSICION ALCANZADA") 
+		sys.exit("FUERA DE LOS LIMITES") 
 
 def listener():
 
